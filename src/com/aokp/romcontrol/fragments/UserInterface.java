@@ -107,7 +107,8 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
     private static final CharSequence PREF_POWER_CRT_MODE = "system_power_crt_mode";
     private static final CharSequence PREF_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
     private static final CharSequence PREF_STATUSBAR_HIDDEN = "statusbar_hidden";
-
+    private static final String KEY_STATUS_BAR_TRAFFIC = "status_bar_traffic";
+    
     private static final int REQUEST_PICK_WALLPAPER = 201;
     //private static final int REQUEST_PICK_CUSTOM_ICON = 202; //unused
     private static final int REQUEST_PICK_BOOT_ANIMATION = 203;
@@ -145,7 +146,8 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
     CheckBoxPreference mStatusBarHide;
     ListPreference mListViewAnimation;
     ListPreference mListViewInterpolator;
-
+    CheckBoxPreference mStatusBarTraffic;
+    
     private AnimationDrawable mAnimationPart1;
     private AnimationDrawable mAnimationPart2;
     private String mErrormsg;
@@ -283,6 +285,10 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
                 (CheckBoxPreference) findPreference(PREF_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
         mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getBoolean(mContentResolver,
                 Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, true));
+
+        mStatusBarTraffic = (CheckBoxPreference) findPreference(KEY_STATUS_BAR_TRAFFIC);
+        mStatusBarTraffic.setChecked(Settings.System.getBoolean(mContentResolver,
+                Settings.System.STATUS_BAR_TRAFFIC, false));
 
         // hide option if device is already set to never wake up
         if (!mContext.getResources().getBoolean(
@@ -583,6 +589,11 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.System.putBoolean(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_HIDDEN, checked ? true : false);
+            return true;
+        } else if (preference == mStatusBarTraffic) {
+            Settings.System.putBoolean(mContentResolver,
+                    Settings.System.STATUS_BAR_TRAFFIC,
+                    ((TwoStatePreference) preference).isChecked());
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
