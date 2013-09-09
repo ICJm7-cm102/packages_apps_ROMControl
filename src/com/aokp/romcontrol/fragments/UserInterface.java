@@ -285,18 +285,20 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
 
         //ListView Animations
         mListViewAnimation = (ListPreference) findPreference(KEY_LISTVIEW_ANIMATION);
-        int listviewanimation = Settings.System.getInt(getActivity().getContentResolver(),
-            Settings.System.LISTVIEW_ANIMATION, 1);
-        mListViewAnimation.setValue(String.valueOf(listviewanimation));
-        mListViewAnimation.setSummary(mListViewAnimation.getEntry());
+        int listviewanimation = Settings.System.getInt(mContentResolver,
+                Settings.System.LISTVIEW_ANIMATION, 0);
+        mListViewAnimation.setValueIndex(listviewanimation);
+        mListViewAnimation.setSummary(mListViewAnimation.getEntries()[listviewanimation]);
         mListViewAnimation.setOnPreferenceChangeListener(this);
 
         mListViewInterpolator = (ListPreference) findPreference(KEY_LISTVIEW_INTERPOLATOR);
-        int listviewinterpolator = Settings.System.getInt(getActivity().getContentResolver(),
-            Settings.System.LISTVIEW_INTERPOLATOR, 0);
-        mListViewInterpolator.setValue(String.valueOf(listviewinterpolator));
-        mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
+        int listviewinterpolator = Settings.System.getInt(mContentResolver,
+                Settings.System.LISTVIEW_INTERPOLATOR, 0);
+        mListViewInterpolator.setValueIndex(listviewinterpolator);
+        mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[listviewinterpolator]);
         mListViewInterpolator.setOnPreferenceChangeListener(this);
+        mListViewInterpolator.setEnabled(listviewanimation > 0);
+
         }
 
         if (isTabletUI(mContext)) {
@@ -1044,16 +1046,16 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
             int listviewanimation = Integer.valueOf((String) newValue);
             int index = mListViewAnimation.findIndexOfValue((String) newValue);
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.LISTVIEW_ANIMATION,
-                    listviewanimation);
+                    Settings.System.LISTVIEW_ANIMATION, listviewanimation);
             mListViewAnimation.setSummary(mListViewAnimation.getEntries()[index]);
+            mListViewInterpolator.setEnabled(listviewanimation > 0);
             return true;
+
         } else if (preference == mListViewInterpolator) {
             int listviewinterpolator = Integer.valueOf((String) newValue);
             int index = mListViewInterpolator.findIndexOfValue((String) newValue);
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.LISTVIEW_INTERPOLATOR,
-                    listviewinterpolator);
+                    Settings.System.LISTVIEW_INTERPOLATOR, listviewinterpolator);
             mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[index]);
             return true;
         }
