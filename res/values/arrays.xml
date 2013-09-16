@@ -229,6 +229,11 @@
         <item>@string/icon_with_text</item>
         <item>@string/icon_with_centered_text</item>
         <item>@string/circlemod</item>
+        <item>@string/rb_battery4</item>
+        <item>@string/rb_battery5</item>
+        <item>@string/rb_battery6</item>
+        <item>@string/rb_battery7</item>
+        <item>@string/rb_battery8</item>
         <item>@string/dont_show</item>
     </string-array>
     <string-array name="battery_icon_values" translatable="false">
@@ -238,6 +243,11 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
     </string-array>
 
     <!-- NavBar -->
