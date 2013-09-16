@@ -1030,11 +1030,11 @@
     <string name="icon_with_text">Icon with text</string>
     <string name="icon_with_centered_text">Icon with centered text</string>
     <string name="circlemod">CircleMOD</string>
-    <string name="rb_battery4">RootBox Racing</string>
-    <string name="rb_battery5">RootBox Gauge</string>
-    <string name="rb_battery6">RootBox Planet</string>
-    <string name="rb_battery7">RootBox Slider</string>
-    <string name="rb_battery8">RootBox Brick</string>
+    <string name="rb_battery4">Racing</string>
+    <string name="rb_battery5">Gauge</string>
+    <string name="rb_battery6">Planet</string>
+    <string name="rb_battery7">Slider</string>
+    <string name="rb_battery8">Brick</string>
 
     <!-- NavBar -->
     <string name="right">Right</string>
