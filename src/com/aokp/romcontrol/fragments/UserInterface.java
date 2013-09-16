@@ -311,7 +311,6 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
         mListViewInterpolator.setValue(String.valueOf(listviewinterpolator));
         mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
         mListViewInterpolator.setOnPreferenceChangeListener(this);
-        mListViewInterpolator.setEnabled(listviewanimation!=0);
 
         mUiMode = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.CURRENT_UI_MODE, 0);
