@@ -216,14 +216,17 @@ public class StatusBarToggles extends AOKPPreferenceFragment implements
         if (isSW600DPScreen(mContext) || isTabletUI(mContext)) {
             getPreferenceScreen().removePreference(mFastToggle);
             getPreferenceScreen().removePreference(mChooseFastToggleSide);
+            getPreferenceScreen().removePreference(mSwipeToSwitch);
         }
 
         if (Integer.parseInt(mTogglesStyle.getValue()) > 1) {
             mFastToggle.setEnabled(false);
             mTogglesPerRow.setEnabled(false);
+            mSwipeToSwitch.setEnabled(false);
             mFastToggle.setSummary(R.string.enable_toggle_tiles);
             mTogglesPerRow.setSummary(R.string.enable_toggle_tiles);
             mChooseFastToggleSide.setSummary(R.string.enable_fasttoggle);
+            mSwipeToSwitch.setSummary(R.string.enable_toggle_tiles);
         } else {
             mChooseFastToggleSide.setSummary(mFastToggle.isChecked()
                     ? R.string.toggle_choose_fasttoggle_side_summary
@@ -299,10 +302,13 @@ public class StatusBarToggles extends AOKPPreferenceFragment implements
             mTogglesStyle.setValue((String) newValue);
             mFastToggle.setEnabled(val > 1 ? false : true);
             mTogglesPerRow.setEnabled(val > 1 ? false : true);
+            mSwipeToSwitch.setEnabled(val > 1 ? false : true);
             mFastToggle.setSummary(val > 1 ? R.string.enable_toggle_tiles
                     : R.string.toggle_enable_fasttoggle_summary);
             mTogglesPerRow.setSummary(val > 1 ? R.string.enable_toggle_tiles
                     : R.string.toggles_per_row_summary);
+            mSwipeToSwitch.setSummary(val > 1 ? R.string.enable_toggle_tiles
+                    : R.string.swipe_to_switch_summary);
             if (val > 1) {
                mChooseFastToggleSide.setSummary(R.string.enable_fasttoggle);
             } else {
