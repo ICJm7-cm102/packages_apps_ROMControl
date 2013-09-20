@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -896,25 +895,26 @@ public class Lockscreens extends AOKPPreferenceFragment implements
 
     private void prepareAndSetWallpaper() {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
-        int width = display.getWidth();
-        int height = display.getHeight();
+
+        int width = getActivity().getWallpaperDesiredMinimumWidth();
+        int height = getActivity().getWallpaperDesiredMinimumHeight();
+        float spotlightX = (float)display.getWidth() / width;
+        float spotlightY = (float)display.getHeight() / height;
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
-        boolean isPortrait = getResources()
-                .getConfiguration().orientation
-                == Configuration.ORIENTATION_PORTRAIT;
-        intent.putExtra("aspectX", isPortrait ? width : height);
-        intent.putExtra("aspectY", isPortrait ? height : width);
-        intent.putExtra("outputX", width);
-        intent.putExtra("outputY", height);
         intent.putExtra("scale", true);
         intent.putExtra("scaleUpIfNeeded", true);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                getLockscreenExternalUri());
-        intent.putExtra("outputFormat",
-                Bitmap.CompressFormat.PNG.toString());
+        intent.putExtra("aspectX", width);
+        intent.putExtra("aspectY", height);
+        intent.putExtra("outputX", width);
+        intent.putExtra("outputY", height);
+        intent.putExtra("spotlightX", spotlightX);
+        intent.putExtra("spotlightY", spotlightY);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, getLockscreenExternalUri());
+
         startActivityForResult(intent, REQUEST_PICK_WALLPAPER);
     }
 
