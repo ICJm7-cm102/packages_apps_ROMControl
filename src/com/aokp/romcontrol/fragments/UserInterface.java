@@ -84,7 +84,6 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
     private static final CharSequence PREF_SHOW_OVERFLOW = "show_overflow";
     private static final CharSequence PREF_VIBRATE_NOTIF_EXPAND = "vibrate_notif_expand";
     private static final CharSequence PREF_LONGPRESS_TO_KILL = "longpress_to_kill";
-    private static final CharSequence PREF_CAMERA_WIDGET_HIDE = "camera_widget_hide";
     private static final CharSequence PREF_RECENT_KILL_ALL = "recent_kill_all";
     private static final CharSequence PREF_RECENT_GOOGLE_ASSIST = "recent_google_assist";
     private static final CharSequence PREF_RAM_USAGE_BAR = "ram_usage_bar";
@@ -130,7 +129,6 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
     CheckBoxPreference mShowActionOverflow;
     CheckBoxPreference mVibrateOnExpand;
     CheckBoxPreference mLongPressToKill;
-    CheckBoxPreference mCameraWidget;
     CheckBoxPreference mRecentKillAll;
     CheckBoxPreference mRecentGoog;
     CheckBoxPreference mRamBar;
@@ -232,11 +230,6 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
         mRecentKillAll = (CheckBoxPreference) findPreference(PREF_RECENT_KILL_ALL);
         mRecentKillAll.setChecked(Settings.System.getBoolean(mContentResolver,
                 Settings.System.RECENT_KILL_ALL_BUTTON, false));
-
-
-        mCameraWidget = (CheckBoxPreference) findPreference(PREF_CAMERA_WIDGET_HIDE);
-        mCameraWidget.setChecked(Settings.System.getBoolean(mContentResolver,
-                Settings.System.CAMERA_WIDGET_HIDE, false));
 
         mRecentGoog = (CheckBoxPreference) findPreference(PREF_RECENT_GOOGLE_ASSIST);
         mRecentGoog.setChecked(Settings.System.getBoolean(mContentResolver,
@@ -565,11 +558,6 @@ public class UserInterface extends AOKPPreferenceFragment implements OnPreferenc
             boolean checked = ((TwoStatePreference) preference).isChecked();
             Settings.System.putBoolean(mContentResolver,
                     Settings.System.RECENT_KILL_ALL_BUTTON, checked);
-            return true;
-        } else if (preference == mCameraWidget) {
-            boolean checked = ((TwoStatePreference) preference).isChecked();
-            Settings.System.putBoolean(mContentResolver,
-                    Settings.System.CAMERA_WIDGET_HIDE, checked);
             return true;
         } else if (preference == mRecentGoog) {
             boolean checked = ((TwoStatePreference) preference).isChecked();
