@@ -596,7 +596,7 @@ public class Lockscreens extends AOKPPreferenceFragment implements
         mLockCarouselSwitch.setChecked(Settings.System.getBoolean(cr,
                 Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, false));
         mCameraWidgetSwitch.setChecked(Settings.System.getBoolean(cr,
-                Settings.System.CAMERA_WIDGET_HIDE, false));
+                Settings.System.CAMERA_WIDGET_HIDE, true));
     }
 
 
