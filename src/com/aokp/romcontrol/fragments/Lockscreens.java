@@ -389,7 +389,7 @@ public class Lockscreens extends AOKPPreferenceFragment implements
         });
 
         mCameraWidgetText = ((TextView) getActivity().findViewById(R.id.lockscreen_camera_widget_id));
-        mCameraWidgetText.setOnClickListener(mLockCarouselTextListener);
+        mCameraWidgetText.setOnClickListener(mCameraWidgetTextListener);
         mCameraWidgetSwitch = (Switch) getActivity().findViewById(R.id.lockscreen_camera_widget_switch);
         mCameraWidgetSwitch
                 .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -519,7 +519,7 @@ public class Lockscreens extends AOKPPreferenceFragment implements
         }
     };
 
-    private TextView.OnClickListener mCameraWidgetListener = new TextView.OnClickListener() {
+    private TextView.OnClickListener mCameraWidgetTextListener = new TextView.OnClickListener() {
         public void onClick(View v) {
             createMessage(
                     getResources().getString(
